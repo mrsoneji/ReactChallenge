@@ -19,8 +19,6 @@ const store = createStore(rootReducer, applyMiddleware(thunk))
 class App extends Component {
   constructor (props) {
     super(props)
-
-    require('dotenv').config()
   }
 
   render () {
