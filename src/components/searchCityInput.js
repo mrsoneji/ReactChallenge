@@ -32,9 +32,10 @@ class SearchCityInput extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
+
+    // using store for error management 
     if (nextProps.weatherData !== undefined) {
       if (nextProps.weatherData.error !== undefined) {
-        console.log('firing componentWillReceiveProps', nextProps.weatherData.error)
         toast(
           {
               title: 'Info Toast',
@@ -60,7 +61,11 @@ class SearchCityInput extends Component {
     // check if value doesn't exists before insert it on the array
     const alreadyInserted = (result, latest) => latest.some(e => e.name === result.name)
     const updateLocalStorage = (result, latest) => { 
-      latest.push(result) 
+      // only keep 5 entries limit
+      latest.splice(4)
+      // insert in first position
+      latest.unshift(result) 
+
       localStorage.setItem('latest', JSON.stringify(latest)) 
     }
 
@@ -73,6 +78,7 @@ class SearchCityInput extends Component {
   onSearchChange = (evt, { value }) => {
     this.setState({...this.state, value}, () => {
 
+      // grab city list from data/city.list.json and filter it
       if (this.state.value.length > 3) {
         const re = new RegExp(value, 'i')
         const isMatch = result => re.test(result.name)
@@ -85,7 +91,7 @@ class SearchCityInput extends Component {
         })
       }
       
-    }) // Because setState is an asynchronous process
+    }) // setState is an asynchronous process
   }
 
   render () {

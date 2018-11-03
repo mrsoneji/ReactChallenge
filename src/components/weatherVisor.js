@@ -10,13 +10,11 @@ class WeatherVisor extends Component {
   constructor (props) {
     super(props)
 
+    // for a single button with a single state
+    // we also can use withState function from recompose library
     this.state = {
       unit: 'metric'
     }
-  }
-
-  componentDidMount () {
-
   }
 
   handleButtonClick (unit) {
@@ -78,7 +76,6 @@ class WeatherVisor extends Component {
           </List.Item>
         </List>
       </Segment>
-
     )
   }
 }
