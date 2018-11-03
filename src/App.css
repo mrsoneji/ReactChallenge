@@ -1,0 +1,27 @@
+.App {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #282c34;
+  margin-top: 14px;
+}
+
+.Search-Input {
+   font-size: calc(18px + 2vmin);
+}
+
+main {
+    flex: 1 1 auto;
+    color: white;
+    background: #333;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
