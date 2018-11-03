@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Search, Grid, Segment, Header } from 'semantic-ui-react'
+import { Search, Header } from 'semantic-ui-react'
 
 import { getCities } from '../networking/cities.networking'
 import { getWeatherData } from '../actions/weatherData.actions'
 
 import { toast } from 'react-semantic-toasts'
+import PropTypes from 'prop-types'
 
 class SearchCityInput extends Component {
 
@@ -38,10 +39,10 @@ class SearchCityInput extends Component {
       if (nextProps.weatherData.error !== undefined) {
         toast(
           {
-              title: 'Info Toast',
-              type: 'error',
-              icon:'envelope',
-              description: 'An error has occurred'
+            title: 'Info Toast',
+            type: 'error',
+            icon:'envelope',
+            description: 'An error has occurred'
           }
         )
       }
@@ -104,11 +105,18 @@ class SearchCityInput extends Component {
         onResultSelect={this.onResultSelect}
         results={this.state.results}
         value={this.state.value}
-        resultRenderer={({ name, country }) => <Header as='h5'>{name}, {country}</Header>}
+        resultRenderer={resultRenderer}
         input={{fluid:true}}
       />
     )
   }
+}
+  
+const resultRenderer = ({ id, name, country }) => <Header key={id} as='h5'>{name}, {country}</Header>
+resultRenderer.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  country: PropTypes.string,
 }
 
 const mapStateToProps = state => ({
