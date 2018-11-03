@@ -10,17 +10,13 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers'
 
 import { Grid, Container } from 'semantic-ui-react'
-import { SemanticToastContainer, toast } from 'react-semantic-toasts'
+import { SemanticToastContainer } from 'react-semantic-toasts'
 
 import './App.css'
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-  }
-
   render () {
     return (
       <Provider store={store}>

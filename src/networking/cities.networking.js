@@ -9,7 +9,7 @@ export const getCities = () => {
 
 export const getWeatherData = async (cityId, units) => {
   try {
-    const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=d82637ea690828793320a94965147d17&units=${units}`)
+    const { data } = await axios.get(`http://api.openweathermap.org/data/2.5/weather?id=${cityId}&APPID=${OPENWEATHER_MAP_APPID}&units=${units}`)
     return data
   } catch (ex) {
     throw ex

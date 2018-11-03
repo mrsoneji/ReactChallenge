@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl'
 
 import { Segment, List, Loader, Button } from 'semantic-ui-react'
 
