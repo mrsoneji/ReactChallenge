@@ -24,7 +24,7 @@ const weatherData = (state = [], action) => {
       }
 
     case 'ERROR_WEATHER_DATA':
-      console.log('firing reducer')
+
       return {
         ...state,
         error: action.data,
