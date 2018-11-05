@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Search, Header } from 'semantic-ui-react'
+import { Search, Header, Button, Icon } from 'semantic-ui-react'
 
 import { getCities } from '../networking/cities.networking'
 import { getWeatherData } from '../actions/weatherData.actions'
@@ -13,13 +13,10 @@ class SearchCityInput extends Component {
   constructor (props) {
     super(props)
 
-    // get latest search cities from localStorage
-    let latest = JSON.parse(localStorage.getItem('latest'))
-
     this.state = {
       loading: false,
       open: false,
-      results: latest
+      results: []
     }
 
     setTimeout(() => {
@@ -30,6 +27,10 @@ class SearchCityInput extends Component {
         }
       )
     }, 2000);
+  }
+
+  componentDidMount() {
+    this.loadLatestSearch()
   }
 
   componentWillReceiveProps (nextProps) {
@@ -49,7 +50,33 @@ class SearchCityInput extends Component {
     }
   }
 
+  loadLatestSearch = () => {
+    // get latest search cities from localStorage
+    let latest = JSON.parse(localStorage.getItem('latest'))
+    latest && latest.push({id: 'CLEAR', name:'Clear history'})
+
+    this.setState({
+      ...this.state,
+      results: latest
+    })
+  }
+
+  onClearHistory = () => {
+    localStorage.clear()
+
+    this.setState({
+      ...this.state,
+      open: false,
+      results: []
+    })
+  }
+
   onResultSelect = (evt, { result }) => { 
+
+    if (result.id === 'CLEAR') {
+      this.onClearHistory()
+      return
+    }
 
     // get weather data from openweather service
     // we use result object as a destructired assignment coming
@@ -78,6 +105,9 @@ class SearchCityInput extends Component {
 
   onSearchChange = (evt, { value }) => {
     this.setState({...this.state, value}, () => {
+      // clear search criteria and reload latest search terms
+      if (this.state.value.length === 0) this.
+        loadLatestSearch()
 
       // grab city list from data/city.list.json and filter it
       if (this.state.value.length > 3) {
@@ -112,7 +142,7 @@ class SearchCityInput extends Component {
   }
 }
   
-const resultRenderer = ({ id, name, country }) => <Header key={id} as='h5'>{name}, {country}</Header>
+const resultRenderer = ({ id, name, country }) => <Header key={id} as='h5'>{name}{country && ', '} {country}</Header>
 resultRenderer.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
