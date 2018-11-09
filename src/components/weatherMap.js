@@ -6,19 +6,15 @@ import ReactMapGL from 'react-map-gl'
 import { MAPBOX_TOKEN_ID } from '../config/default.json'
 
 class WeatherVisor extends Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      loading: false,
-      results: [],
-      viewport: {
-        width: 600,
-        height: 400,
-        latitude: -34.61,
-        longitude: -58.38,
-        zoom: 8
-      }
+  state = {
+    loading: false,
+    results: [],
+    viewport: {
+      width: 600,
+      height: 400,
+      latitude: -34.61,
+      longitude: -58.38,
+      zoom: 8
     }
   }
 

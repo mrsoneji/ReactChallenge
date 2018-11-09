@@ -6,14 +6,8 @@ import { Segment, List, Loader, Button } from 'semantic-ui-react'
 import { getWeatherData } from '../actions/weatherData.actions'
 
 class WeatherVisor extends Component {
-  constructor (props) {
-    super(props)
-
-    // for a single button with a single state
-    // we also can use withState function from recompose library
-    this.state = {
-      unit: 'metric'
-    }
+  state = {
+    unit: 'metric'
   }
 
   handleButtonClick (unit) {

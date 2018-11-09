@@ -9,26 +9,12 @@ import { toast } from 'react-semantic-toasts'
 import PropTypes from 'prop-types'
 
 class SearchCityInput extends Component {
-
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      loading: false,
-      open: false,
-      results: []
-    }
-
-    setTimeout(() => {
-      toast(
-        {
-            title: 'Info Toast',
-            description: 'This is a Semantic UI toast'
-        }
-      )
-    }, 2000);
+  state = {
+    loading: false,
+    open: false,
+    results: []
   }
-
+  
   componentDidMount() {
     this.loadLatestSearch()
   }
